@@ -11,6 +11,8 @@
     ComfyJS.Init( "ChannelName" );
 
     var myObj, myJSON, text, obj;
+    var playTime = 4500;
+    var timeout = 180000;
 
     image = document.createElement('img');
     document.body.appendChild(image);
@@ -19,12 +21,12 @@
         if( command === "gif" ) {
             text = localStorage.getItem(user);
             obj = JSON.parse(text);
-            if(obj.time + 180000 <= new Date().valueOf()) {
+            if(obj.time + timeout <= new Date().valueOf()) {
                 image.src = obj.gif;
                 image.style = "display: inline";
                 setTimeout(function () {
                     image.style = "display: none";
-                }, 4500)
+                }, playTime)
                 myObj = {name: user, gif: obj.gif, time: new Date().valueOf()};
                 myJSON = JSON.stringify(myObj);
                 localStorage.setItem(user, myJSON);
