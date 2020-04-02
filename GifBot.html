@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
+</head>
+<body>
+<p id="demo"></p>
+
+<script>
+
+    ComfyJS.Init( "ChannelName" );
+
+    var myObj, myJSON, text, obj;
+
+    image = document.createElement('img');
+    document.body.appendChild(image);
+
+    ComfyJS.onCommand = ( user, command, message, flags, extra ) => {
+        if( command === "gif" ) {
+            text = localStorage.getItem(user);
+            obj = JSON.parse(text);
+            if(obj.time + 180000 <= new Date().valueOf()) {
+                image.src = obj.gif;
+                image.style = "display: inline";
+                setTimeout(function () {
+                    image.style = "display: none";
+                }, 4500)
+                myObj = {name: user, gif: obj.gif, time: new Date().valueOf()};
+                myJSON = JSON.stringify(myObj);
+                localStorage.setItem(user, myJSON);
+            }
+        }
+        if( flags.mod || flags.broadcaster) {
+            if (command.includes("adduser")) {
+                var res = message.split(" ", 2);
+                myObj = {name: res[0], gif: res[1], time: 0};
+                myJSON = JSON.stringify(myObj);
+                localStorage.setItem(res[0], myJSON);
+                console.log("user added");
+                console.log(res[0]);
+                console.log(res[1]);
+            }
+            if (command.includes("removeuser")) {
+                localStorage.removeItem(message, myJSON);
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
