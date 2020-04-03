@@ -2,7 +2,7 @@
 A simple Gif Bot that takes chat commands and plays a Gif on command
 
 ## Shoutout
-Thanks to Instafluff for the ComfyJS Library
+Thanks to Instafluff for the ComfyJS Library (https://www.github.com/instafluff/ComfyJS)
 
 ## Setup
 Download and edit the GifBot.html file so that "ChannelName" is replaced with your channel name in lower case letters. Then you have to add a browser source in OBS or XSplit and use local file and add the GifBot.html
