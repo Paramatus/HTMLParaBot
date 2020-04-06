@@ -15,7 +15,7 @@
     ComfyJS.Init( "ChannelName" );
 
     var myObj, myJSON, text, obj;
-    var timeout = 0;
+    var timeout = 180000;
 
     image = document.createElement('img');
     document.body.appendChild(image);
@@ -28,7 +28,8 @@
             if (obj.time + timeout <= new Date().valueOf()) {
                 //Load Files
                 var playtime = parseInt(obj.duration);
-                var sound = document.getElementById("myAudio");
+                if(playtime == null || playtime <= 0) playtime = 4500;
+                const sound = document.getElementById("myAudio");
                 sound.src = obj.sound;
                 image.src = obj.gif;
                 sound.volume = obj.volume;

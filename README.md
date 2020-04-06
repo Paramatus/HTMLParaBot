@@ -21,10 +21,31 @@ to make the gif appear in the bottom right corner. Just remove the "bottom:0" or
 ## Change Gif play time and timeout between Gifs
 To change the Timeout, that someone has to wait to play a gif, you have to change the variable Timeout. It is measured in milliseconds
 
-The Gif play duration is also measuret in Milliseconds and can be changed by changing the playTime varaible
+The Gif play duration is also measured in Milliseconds and can be changed by changing the playTime varaible
 
 Default:
 ```
 playTime: 4500
 timeout: 180000
 ```
+##Commands
+| Command  | Discription |
+| ------------- | ------------- |
+| !gif | Plays the personal Gif of a User |
+| !adduser [username] [gif Link]  | Adds or updates a personal gif for a User  |
+| !removeuser [username] | Removes the gif of a User  |
+
+#Advanced Bot
+The GifBotAdvanced gives the opportunity to play sound effects, while the give is playing. It also requires a view more information when adding a User. (The Setup is still the same)
+
+## Commands
+
+| Command  | Discription |
+| ------------- | ------------- |
+| !gif | Plays the personal Gif of a User |
+| !adduser [username] [gif Link] [display time of the gif] [soundlink (must end on .mp3)] [volume (0.0 - 1.0)]   | Adds or updates a personal gif for a User every variable after the gif link is not mandatory for a gif to show up.  |
+| !removeuser [username] | Removes the gif of a User  |
+| !setvolume [username] [volume (0.0 - 1.0)] | Updates the volume of the the soundeffect for a specific User |
+
+## Side Note
+Yes, the display duration is not a set Value anymore and is must not be modified when adding a User because it will get set to 4500ms when not set. But do not leave out variables that are in between other variables. 
