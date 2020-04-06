@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
+</head>
+<body>
+<p id="demo"></p>
+<audio id="myAudio">
+    <source src="" type="audio/mpeg" preload="auto">
+    Your browser does not support the audio element.
+</audio>
+
+<script>
+
+    ComfyJS.Init( "ChannelName" );
+
+    var myObj, myJSON, text, obj;
+    var timeout = 0;
+
+    image = document.createElement('img');
+    document.body.appendChild(image);
+
+    ComfyJS.onCommand = async (user, command, message, flags, extra) => {
+        if (command === "gif") {
+            text = localStorage.getItem(user);
+            obj = JSON.parse(text);
+            //Check if person is allowed to write command again
+            if (obj.time + timeout <= new Date().valueOf()) {
+                //Load Files
+                var playtime = parseInt(obj.duration);
+                var sound = document.getElementById("myAudio");
+                sound.src = obj.sound;
+                image.src = obj.gif;
+                sound.volume = obj.volume;
+                image.style = "display: inline";
+                sound.play();
+                //after set amount of time the gif disappears and sound is stopped
+                setTimeout(function () {
+                    image.style = "display: none";
+                    sound.pause();
+                }, playtime)
+                myObj = {
+                    name: user,
+                    gif: obj.gif,
+                    duration: obj.duration,
+                    sound: obj.sound,
+                    volume: obj.volume,
+                    time: new Date().valueOf()
+                };
+                myJSON = JSON.stringify(myObj);
+                localStorage.setItem(user, myJSON);
+            }
+        }
+        if (flags.mod || flags.broadcaster) {
+            if (command.includes("adduser")) {
+                var res = message.split(" ", 5);
+                myObj = {name: res[0], gif: res[1], duration: res[2], sound: res[3], volume: res[4], time: 0};
+                myJSON = JSON.stringify(myObj);
+                localStorage.setItem(res[0], myJSON);
+                console.log("user added");
+                console.log(res[0]);
+                console.log(res[1]);
+            }
+            if (command.includes("removeuser")) {
+                localStorage.removeItem(message, myJSON);
+            }
+            if (command.includes("setvolume")) {
+                var msg = message.split(" ", 2)
+                text = localStorage.getItem(msg[0]);
+                obj = JSON.parse(text);
+                myObj = {
+                    name: obj.name,
+                    gif: obj.gif,
+                    duration: obj.duration,
+                    sound: obj.sound,
+                    volume: msg[1],
+                    time: obj.time
+                };
+                myJSON = JSON.stringify(myObj);
+                localStorage.setItem(user, myJSON);
+            }
+        }
+    }
+
+</script>
+
+</body>
+</html>
