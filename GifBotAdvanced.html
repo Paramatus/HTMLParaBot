@@ -20,6 +20,34 @@
     image = document.createElement('img');
     document.body.appendChild(image);
 
+    function displayIt(srcPic, srcSound, time){
+        var playtime = time;
+        if(playtime == null || playtime <= 0) playtime = 4500;
+        const sound = document.getElementById("myAudio");
+        sound.src = srcSound;
+        image.src = srcPic;
+        sound.volume = obj.volume;
+        image.style = "display: inline";
+        sound.play();
+        //after set amount of time the gif disappears and sound is stopped
+        setTimeout(function () {
+            image.style = "display: none";
+            sound.pause();
+        }, playtime)
+    }
+
+    function displayIt(srcPic, time){
+        var playtime = time;
+        if(playtime == null || playtime <= 0) playtime = 4500;
+        const sound = document.getElementById("myAudio");
+        image.src = srcPic;
+        image.style = "display: inline";
+        //after set amount of time the gif disappears and sound is stopped
+        setTimeout(function () {
+            image.style = "display: none";
+        }, playtime)
+    }
+
     ComfyJS.onCommand = async (user, command, message, flags, extra) => {
         if (command === "gif") {
             text = localStorage.getItem(user);
@@ -27,19 +55,7 @@
             //Check if person is allowed to write command again
             if (obj.time + timeout <= new Date().valueOf()) {
                 //Load Files
-                var playtime = parseInt(obj.duration);
-                if(playtime == null || playtime <= 0) playtime = 4500;
-                const sound = document.getElementById("myAudio");
-                sound.src = obj.sound;
-                image.src = obj.gif;
-                sound.volume = obj.volume;
-                image.style = "display: inline";
-                sound.play();
-                //after set amount of time the gif disappears and sound is stopped
-                setTimeout(function () {
-                    image.style = "display: none";
-                    sound.pause();
-                }, playtime)
+                displayIt(obj.gif, obj.sound, parseInt(obj.duration));
                 myObj = {
                     name: user,
                     gif: obj.gif,
@@ -66,7 +82,7 @@
                 localStorage.removeItem(message, myJSON);
             }
             if (command.includes("setvolume")) {
-                var msg = message.split(" ", 2)
+                var msg = message.split(" ", 2);
                 text = localStorage.getItem(msg[0]);
                 obj = JSON.parse(text);
                 myObj = {
@@ -79,6 +95,10 @@
                 };
                 myJSON = JSON.stringify(myObj);
                 localStorage.setItem(user, myJSON);
+            }
+            if (command.includes("picture")) {
+                var msg = message.split(" ", 2);
+                displayIt(msg[0], msg[1]*1000);
             }
         }
     }
