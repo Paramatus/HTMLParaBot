@@ -58,3 +58,8 @@ Invalid
 !adduser Testuser piclink soundlink
 ```
 (display-time has to be added before the sound link)
+
+
+
+
+
