@@ -49,3 +49,12 @@ The GifBotAdvanced gives the opportunity to play sound effects, while the give i
 | !picture [picture link] [time in seconds] | Added Mod show picture, which allows a mod to display a picture on stream for a certain amount of time |
 ## Side Note
 Yes, the display duration is not a set Value anymore and is must not be modified when adding a User because it will get set to 4500ms when not set. But do not leave out variables that are in between other variables. 
+Valid:
+```
+!adduser Testuser piclink
+```
+Invalid
+```
+!adduser Testuser piclink soundlink
+```
+(display-time has to be added before the sound link)
