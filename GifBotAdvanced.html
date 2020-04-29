@@ -20,7 +20,7 @@
     image = document.createElement('img');
     document.body.appendChild(image);
 
-    function displayIt(srcPic, srcSound, time){
+    function displayItSound(srcPic, srcSound, time){
         var playtime = time;
         if(playtime == null || playtime <= 0) playtime = 4500;
         const sound = document.getElementById("myAudio");
@@ -36,7 +36,7 @@
         }, playtime)
     }
 
-    function displayIt(srcPic, time){
+    function displayItT(srcPic, time){
         var playtime = time;
         if(playtime == null || playtime <= 0) playtime = 4500;
         const sound = document.getElementById("myAudio");
@@ -48,19 +48,25 @@
         }, playtime)
     }
 
-    function displayIt(srcPic){
+    function displayItS(srcPic){
         image.src = srcPic;
         image.style = "display: inline";
     }
 
     ComfyJS.onCommand = async (user, command, message, flags, extra) => {
+        var sound;
         if (command === "gif") {
             text = localStorage.getItem(user);
             obj = JSON.parse(text);
             //Check if person is allowed to write command again
             if (obj.time + timeout <= new Date().valueOf()) {
                 //Load Files
-                displayIt(obj.gif, obj.sound, parseInt(obj.duration));
+                sound = obj.sound;
+                if (sound == null) {
+                    displayItT(obj.gif, parseInt(obj.duration))
+                } else {
+                    displayItSound(obj.gif, obj.sound, parseInt(obj.duration));
+                }
                 myObj = {
                     name: user,
                     gif: obj.gif,
@@ -104,9 +110,9 @@
             if (command.includes("picture")) {
                 var msg = message.split(" ", 2);
                 if (msg.length == 1) {
-                    displayIt(msg[0]);
+                    displayItS(msg[0]);
                 } else {
-                    displayIt(msg[0], msg[1] * 1000);
+                    displayItT(msg[0], msg[1] * 1000);
                 }
             }
             if (command.includes("removePictutre")) {
