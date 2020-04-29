@@ -31,6 +31,7 @@
     }
 
     ComfyJS.onCommand = async (user, command, message, flags, extra) => {
+        if (flags.mod || flags.broadcaster) {
             if (command.includes("picture")) {
                 var msg = message.split(" ", 2);
                 if (msg.length == 1) {
@@ -43,6 +44,7 @@
                 image.style = "display: none";
             }
         }
+    }
 </script>
 
 </body>
