@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
+</head>
+<body>
+<p id="demo"></p>
+<script>
+
+    ComfyJS.Init( "Channel Name" );
+
+
+    image = document.createElement('img');
+    document.body.appendChild(image);
+
+
+    function displayIt(srcPic, time){
+        var playtime = time;
+        if(playtime == null || playtime <= 0) playtime = 4500;
+        image.src = srcPic;
+        image.style = "display: inline";
+        //after set amount of time the gif disappears and sound is stopped
+        setTimeout(function () {
+            image.style = "display: none";
+        }, playtime)
+    }
+
+    function displayIt(srcPic){
+        image.src = srcPic;
+        image.style = "display: inline";
+    }
+
+    ComfyJS.onCommand = async (user, command, message, flags, extra) => {
+            if (command.includes("picture")) {
+                var msg = message.split(" ", 2);
+                if (msg.length == 1) {
+                    displayIt(msg[0]);
+                } else {
+                    displayIt(msg[0], msg[1] * 1000);
+                }
+            }
+            if (command.includes("removePictutre")) {
+                image.style = "display: none";
+            }
+        }
+</script>
+
+</body>
+</html>
