@@ -48,6 +48,11 @@
         }, playtime)
     }
 
+    function displayIt(srcPic){
+        image.src = srcPic;
+        image.style = "display: inline";
+    }
+
     ComfyJS.onCommand = async (user, command, message, flags, extra) => {
         if (command === "gif") {
             text = localStorage.getItem(user);
@@ -98,7 +103,14 @@
             }
             if (command.includes("picture")) {
                 var msg = message.split(" ", 2);
-                displayIt(msg[0], msg[1]*1000);
+                if (msg.length == 1) {
+                    displayIt(msg[0]);
+                } else {
+                    displayIt(msg[0], msg[1] * 1000);
+                }
+            }
+            if (command.includes("removePictutre")) {
+                image.style = "display: none";
             }
         }
     }
