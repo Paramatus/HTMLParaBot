@@ -8,7 +8,7 @@ Thanks to Instafluff for the ComfyJS Library (https://www.github.com/instafluff/
 Download and edit the GifBot.html file so that "ChannelName" is replaced with your channel name in lower case letters. Then you have to add a browser source in OBS or XSplit and use local file and add the GifBot.html
 
 ## Align the gif to a corner
-To align the Gif you have to eidt the Custom CSS from 
+To align the Gif you have to edit the Custom CSS from 
 ```
 body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }
 ```
@@ -28,7 +28,8 @@ Default:
 playTime: 4500
 timeout: 180000
 ```
-##Commands
+## Commands
+
 | Command  | Discription |
 | ------------- | ------------- |
 | !gif | Plays the personal Gif of a User |
