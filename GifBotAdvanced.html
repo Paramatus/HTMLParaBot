@@ -12,7 +12,7 @@
 
 <script>
 
-    ComfyJS.Init( "Channel Name" );
+    ComfyJS.Init( "Paramatus" );
 
     var myObj, myJSON, text, obj;
     var timeout = 180000;
@@ -39,7 +39,6 @@
     function displayItT(srcPic, time){
         var playtime = time;
         if(playtime == null || playtime <= 0) playtime = 4500;
-        const sound = document.getElementById("myAudio");
         image.src = srcPic;
         image.style = "display: inline";
         //after set amount of time the gif disappears and sound is stopped
@@ -56,7 +55,7 @@
     ComfyJS.onCommand = async (user, command, message, flags, extra) => {
         var sound;
         if (command === "gif") {
-            text = localStorage.getItem(user);
+            text = localStorage.getItem(user + message);
             obj = JSON.parse(text);
             //Check if person is allowed to write command again
             if (obj.time + timeout <= new Date().valueOf()) {
@@ -81,10 +80,10 @@
         }
         if (flags.mod || flags.broadcaster) {
             if (command.includes("adduser")) {
-                var res = message.split(" ", 5);
-                myObj = {name: res[0], gif: res[1], duration: res[2], sound: res[3], volume: res[4], time: 0};
+                var res = message.split(" ", 6);
+                myObj = {name: res[0], gif: res[1], duration: res[2], sound: res[4], volume: res[5], time: 0};
                 myJSON = JSON.stringify(myObj);
-                localStorage.setItem(res[0], myJSON);
+                localStorage.setItem(res[0] + res[3], myJSON);
                 console.log("user added");
                 console.log(res[0]);
                 console.log(res[1]);

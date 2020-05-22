@@ -44,7 +44,7 @@ The GifBotAdvanced gives the opportunity to play sound effects, while the give i
 | Command  | Discription |
 | ------------- | ------------- |
 | !gif | Plays the personal Gif of a User |
-| !adduser [username] [gif Link] [display time of the gif in MS] [soundlink (must end on .mp3)] [volume (0.0 - 1.0)]   | Adds or updates a personal gif for a User every variable after the gif link is not mandatory for a gif to show up.  |
+| !adduser [username] [gif Link] [display time of the gif in MS] [Name for the gif so that people can have multiple gifs] [soundlink (must end on .mp3)] [volume (0.0 - 1.0)]   | Adds or updates a personal gif for a User every variable after the gif link is not mandatory for a gif to show up.  |
 | !removeuser [username] | Removes the gif of a User  |
 | !setvolume [username] [volume (0.0 - 1.0)] | Updates the volume of the the soundeffect for a specific User |
 | !picture [picture link] [time in seconds] | Added Mod show picture, which allows a mod to display a picture on stream for a certain amount of time |
@@ -52,7 +52,7 @@ The GifBotAdvanced gives the opportunity to play sound effects, while the give i
 Yes, the display duration is not a set Value anymore and is must not be modified when adding a User because it will get set to 4500ms when not set. But do not leave out variables that are in between other variables. 
 Valid:
 ```
-!adduser Testuser piclink
+!adduser Testuser piclink duration
 ```
 Invalid
 ```
